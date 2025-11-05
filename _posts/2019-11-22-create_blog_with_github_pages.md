@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "可能是最全面的github pages搭建个人博客教程"
-date:   2019-11-22
+date:   2023-11-22
 tags: [geek]
 comments: true
-author: lemonchann
+author: Steward460
 ---
 
 作为一个程序员怎么能没有自己的个人博客呢，这里详细记录和分享我的博客搭建经验，让你轻轻松松拥有自己的博客网站。傻瓜式一站式教你用 github pages 来搭建博客，详细记录全过程，保证你能学会。
@@ -55,7 +55,7 @@ author: lemonchann
 
 首先你要在[github](https://github.com/)上有自己博客仓库，用来生成和存放博客文章。你可以直接fork我的博客仓库。这样你马上有了自己的博客仓库。
 
-[点这里我的博客地址](https://github.com/lemonchann/lemonchann.github.io)进去点击 fork，之后在你自己的仓库下会看到刚复制的仓库，以后的操作都在你自己的仓库进行，当然想感谢我写这个教程就帮我点个 start 吧！
+[点这里我的博客地址]([[https://github.com/lemonchann/lemonchann.github.io](https://github.com/Steward460/Steward460.github.io)](https://github.com/Steward460/Steward460.github.io))进去点击 fork，之后在你自己的仓库下会看到刚复制的仓库，以后的操作都在你自己的仓库进行，当然想感谢我写这个教程就帮我点个 start 吧！
 
 ![fork博客](https://raw.githubusercontent.com/lemonchann/lemonchann.github.io/master/images/2019-11-22-create_blog_with_github_pages/fork%E5%8D%9A%E5%AE%A2.png)
 
@@ -412,5 +412,6 @@ _include/svg-icons.html生成社交头像的链接
 感谢 [LOFFER ](https://fromendworld.github.io/LOFFER/document/)提供的原始模板，我在其上进行的二次开发。
 
 **我的个人技术公众号「后端技术学堂」分享、记录、成长，扫码添加，一起学习，共同成长。**
+
 
 ![公众号二维码](https://upload-images.jianshu.io/upload_images/7842464-15f939ec039690f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

